@@ -19,7 +19,7 @@ function pick(n: number) {
 
 const now = new Date();
 // algunas fechas de disponibilidad de ejemplo
-const availSoon = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);   // +7 días
+const availSoon = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // +7 días
 const availNextMonth = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // +30 días
 
 async function main() {
@@ -37,13 +37,25 @@ async function main() {
   // Usuarios base
   const [llUser1, llUser2, tnUser] = await Promise.all([
     prisma.user.create({
-      data: { email: "landlord1@atc.local", name: "Laura Prop", role: Role.LANDLORD },
+      data: {
+        email: "landlord1@atc.local",
+        name: "Laura Prop",
+        role: Role.LANDLORD,
+      },
     }),
     prisma.user.create({
-      data: { email: "landlord2@atc.local", name: "Miguel Rent", role: Role.LANDLORD },
+      data: {
+        email: "landlord2@atc.local",
+        name: "Miguel Rent",
+        role: Role.LANDLORD,
+      },
     }),
     prisma.user.create({
-      data: { email: "tenant1@atc.local", name: "Iván Tenant", role: Role.TENANT },
+      data: {
+        email: "tenant1@atc.local",
+        name: "Iván Tenant",
+        role: Role.TENANT,
+      },
     }),
   ]);
 
@@ -74,18 +86,126 @@ async function main() {
     terrace?: boolean | null;
     elevator?: boolean | null;
   }> = [
-    { title: "Piso luminoso en Gràcia", city: "Barcelona", price: 1200, landlordId: landlord1.id, available: availSoon, bedrooms: 2, terrace: true, elevator: true },
-    { title: "Estudio cerca de Sagrada Familia", city: "Barcelona", price: 980, landlordId: landlord1.id, available: now, bedrooms: 1, terrace: false, elevator: true },
-    { title: "2 ambientes en Eixample", city: "Barcelona", price: 1350, landlordId: landlord1.id, available: availSoon, bedrooms: 2, terrace: false, elevator: true },
-    { title: "Ático con terraza en Poblenou", city: "Barcelona", price: 1600, landlordId: landlord2.id, available: availNextMonth, bedrooms: 2, terrace: true, elevator: true },
-    { title: "Loft moderno en Malasaña", city: "Madrid", price: 1100, landlordId: landlord2.id, available: now, bedrooms: 1, terrace: false, elevator: false },
-    { title: "1 dormitorio en Lavapiés", city: "Madrid", price: 950, landlordId: landlord2.id, available: now, bedrooms: 1, terrace: false, elevator: false },
-    { title: "Duplex en Chamberí", city: "Madrid", price: 1550, landlordId: landlord2.id, available: availSoon, bedrooms: 2, terrace: true, elevator: true },
-    { title: "Céntrico en Ciutat Vella", city: "Valencia", price: 900, landlordId: landlord1.id, available: now, bedrooms: 1, terrace: false, elevator: false },
-    { title: "A pasos del Turia", city: "Valencia", price: 1000, landlordId: landlord1.id, available: availSoon, bedrooms: 2, terrace: true, elevator: false },
-    { title: "Cabañita urbana", city: "Barcelona", price: 875, landlordId: landlord1.id, available: now, bedrooms: 1, terrace: false, elevator: false },
-    { title: "Piso familiar en Sants", city: "Barcelona", price: 1300, landlordId: landlord2.id, available: availNextMonth, bedrooms: 3, terrace: true, elevator: true },
-    { title: "Estudio minimalista en Born", city: "Barcelona", price: 1050, landlordId: landlord2.id, available: now, bedrooms: 1, terrace: false, elevator: true },
+    {
+      title: "Piso luminoso en Gràcia",
+      city: "Barcelona",
+      price: 1200,
+      landlordId: landlord1.id,
+      available: availSoon,
+      bedrooms: 2,
+      terrace: true,
+      elevator: true,
+    },
+    {
+      title: "Estudio cerca de Sagrada Familia",
+      city: "Barcelona",
+      price: 980,
+      landlordId: landlord1.id,
+      available: now,
+      bedrooms: 1,
+      terrace: false,
+      elevator: true,
+    },
+    {
+      title: "2 ambientes en Eixample",
+      city: "Barcelona",
+      price: 1350,
+      landlordId: landlord1.id,
+      available: availSoon,
+      bedrooms: 2,
+      terrace: false,
+      elevator: true,
+    },
+    {
+      title: "Ático con terraza en Poblenou",
+      city: "Barcelona",
+      price: 1600,
+      landlordId: landlord2.id,
+      available: availNextMonth,
+      bedrooms: 2,
+      terrace: true,
+      elevator: true,
+    },
+    {
+      title: "Loft moderno en Malasaña",
+      city: "Madrid",
+      price: 1100,
+      landlordId: landlord2.id,
+      available: now,
+      bedrooms: 1,
+      terrace: false,
+      elevator: false,
+    },
+    {
+      title: "1 dormitorio en Lavapiés",
+      city: "Madrid",
+      price: 950,
+      landlordId: landlord2.id,
+      available: now,
+      bedrooms: 1,
+      terrace: false,
+      elevator: false,
+    },
+    {
+      title: "Duplex en Chamberí",
+      city: "Madrid",
+      price: 1550,
+      landlordId: landlord2.id,
+      available: availSoon,
+      bedrooms: 2,
+      terrace: true,
+      elevator: true,
+    },
+    {
+      title: "Céntrico en Ciutat Vella",
+      city: "Valencia",
+      price: 900,
+      landlordId: landlord1.id,
+      available: now,
+      bedrooms: 1,
+      terrace: false,
+      elevator: false,
+    },
+    {
+      title: "A pasos del Turia",
+      city: "Valencia",
+      price: 1000,
+      landlordId: landlord1.id,
+      available: availSoon,
+      bedrooms: 2,
+      terrace: true,
+      elevator: false,
+    },
+    {
+      title: "Cabañita urbana",
+      city: "Barcelona",
+      price: 875,
+      landlordId: landlord1.id,
+      available: now,
+      bedrooms: 1,
+      terrace: false,
+      elevator: false,
+    },
+    {
+      title: "Piso familiar en Sants",
+      city: "Barcelona",
+      price: 1300,
+      landlordId: landlord2.id,
+      available: availNextMonth,
+      bedrooms: 3,
+      terrace: true,
+      elevator: true,
+    },
+    {
+      title: "Estudio minimalista en Born",
+      city: "Barcelona",
+      price: 1050,
+      landlordId: landlord2.id,
+      available: now,
+      bedrooms: 1,
+      terrace: false,
+      elevator: true,
+    },
   ];
 
   // Crear propiedades con relaciones (sin Unchecked) + photos JSON[] + available requerido
@@ -100,7 +220,7 @@ async function main() {
           terrace: p.terrace ?? null,
           elevator: p.elevator ?? null,
           available: p.available, // <- requerido por tu schema
-          photos: pick(3),        // Json? (array de URLs)
+          photos: pick(3), // Json? (array de URLs)
           landlord: { connect: { id: p.landlordId } },
         },
       });
@@ -110,13 +230,24 @@ async function main() {
   // Documentos del tenant (demo)
   await prisma.document.createMany({
     data: [
-      { tenantId: tenant1.id, type: DocumentType.IDDOC, url: "https://example.com/docs/dni.pdf" },
-      { tenantId: tenant1.id, type: DocumentType.PAYSLIP, url: "https://example.com/docs/nomina.pdf" },
+      {
+        tenantId: tenant1.id,
+        type: DocumentType.IDDOC,
+        url: "https://example.com/docs/dni.pdf",
+      },
+      {
+        tenantId: tenant1.id,
+        type: DocumentType.PAYSLIP,
+        url: "https://example.com/docs/nomina.pdf",
+      },
     ],
   });
 
   // Likes iniciales para que “Mis matches” tenga contenido
-  const sampleProps = await prisma.property.findMany({ take: 3, orderBy: { price: "asc" } });
+  const sampleProps = await prisma.property.findMany({
+    take: 3,
+    orderBy: { price: "asc" },
+  });
   for (const prop of sampleProps) {
     await prisma.match.create({
       data: {
@@ -127,7 +258,9 @@ async function main() {
     });
   }
 
-  console.log("✅ Seed completado: users, landlords, tenant, properties, documents y matches demo.");
+  console.log(
+    "✅ Seed completado: users, landlords, tenant, properties, documents y matches demo.",
+  );
 }
 
 main()
